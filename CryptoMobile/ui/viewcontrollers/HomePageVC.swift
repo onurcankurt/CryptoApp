@@ -19,6 +19,8 @@ class HomePageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(favoriteStatusChanged), name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
+        
         searchBar.delegate = self
         cryptoTableView.delegate = self
         cryptoTableView.dataSource = self
@@ -30,11 +32,29 @@ class HomePageVC: UIViewController {
             }
         })
     }
+    @objc func favoriteStatusChanged() {
+        // Reload data
+        viewModel.fetchData()
+        cryptoTableView.reloadData()
+    }
 }
 
 extension HomePageVC: CryptoCellProtocol {
     func addToFavorites(indexPath: IndexPath) {
-        print("added to favorites")
+        let currency = currencyList[indexPath.row]
+        
+        if currency.isFav == false {
+            currency.isFav?.toggle()
+            // add to sqlite fav list here
+            //
+            //
+        } else {
+            currency.isFav?.toggle()
+            // delete from sqlite fav list here
+            //
+            //
+        }
+        NotificationCenter.default.post(name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
     }
 }
 
@@ -57,20 +77,20 @@ extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
         let currency = currencyList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "cryptoCell") as! CryptoCell
         
-        if let url = URL(string: currency.image){
+        if let url = URL(string: currency.image!){
             DispatchQueue.main.async {
                 cell.cryptoImageView.kf.setImage(with: url)
             }
         }
         
         cell.nameLabel.text = currency.name
-        cell.placeLabel.text = "\(currency.market_cap_rank)"
-        cell.priceLabel.text = "$\(currency.current_price)"
-        cell.symbolLabel.text = currency.symbol.uppercased()
+        cell.placeLabel.text = "\(currency.market_cap_rank!)"
+        cell.priceLabel.text = "$\(currency.current_price!)"
+        cell.symbolLabel.text = currency.symbol!.uppercased()
         
-        if currency.price_change_24h < 0 {
+        if currency.price_change_24h! < 0 {
             cell.priceLabel.textColor = .systemRed
-        } else if currency.price_change_24h > 0 {
+        } else if currency.price_change_24h! > 0 {
             cell.priceLabel.textColor = .systemGreen
         } else {
             cell.priceLabel.textColor = .black
@@ -78,6 +98,14 @@ extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.indexPath = indexPath
         cell.cryptoCellProtocol = self
+        
+        DispatchQueue.main.async {
+            if currency.isFav == true{
+                cell.starButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            } else {
+                cell.starButton.setImage(UIImage(systemName: "star"), for: .normal)
+            }
+        }
         
         return cell
     }

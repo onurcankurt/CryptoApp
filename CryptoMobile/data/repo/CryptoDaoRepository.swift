@@ -18,6 +18,12 @@ class CryptoDaoRepository {
         AF.request(url).responseDecodable(of: [CurrencyElement].self) { response in
             switch response.result {
                 case .success(let cryptos):
+                    
+                    for crypto in cryptos{
+                        crypto.isFav = false //Setting the fav values ​​of cryptos to false
+                    }
+                    // connect sqlite and control if crypto is in fav list
+                    
                     self.cryptoCurrencies.onNext(cryptos)
                     
                 case .failure(let error):
@@ -36,8 +42,8 @@ class CryptoDaoRepository {
                     let reply = try JSONDecoder().decode([CurrencyElement].self, from: data)
                     
                     for currency in reply {
-                        if currency.name.uppercased().contains(searchText.uppercased()) ||
-                            currency.symbol.uppercased().contains(searchText.uppercased()) {
+                        if currency.name!.uppercased().contains(searchText.uppercased()) ||
+                            currency.symbol!.uppercased().contains(searchText.uppercased()) {
                             resultList.append(currency)
                         }
                     }

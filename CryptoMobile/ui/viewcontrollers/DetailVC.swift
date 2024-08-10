@@ -30,21 +30,21 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         
         if let c = detailCurrency {
-            prices_24h = c.sparkline_in_7d.price!
-            priceLabel.text = "\(c.current_price.formatted(.currency(code: "USD")))"
-            highLabel_24h.text = "\(c.high_24h.formatted(.currency(code: "USD")))"
-            lowLabel_24h.text = "\(c.low_24h.formatted(.currency(code: "USD")))"
-            totalVolumeLabel.text = "\(c.total_volume.formatted(.currency(code: "USD")))"
-            totalSupplyLabel.text = "\(c.total_supply?.formatted(.number) ?? "0.0") \(c.symbol.uppercased())"
-            priceChangeLabel.text = "\(c.price_change_24h.formatted(.currency(code: "USD")))"
-            priceChangePercentageLabel.text = "\(c.price_change_percentage_24h.formatted(.number))%"
+            prices_24h = c.sparkline_in_7d!.price!
+            priceLabel.text = "\(c.current_price!.formatted(.currency(code: "USD")))"
+            highLabel_24h.text = "\(c.high_24h!.formatted(.currency(code: "USD")))"
+            lowLabel_24h.text = "\(c.low_24h!.formatted(.currency(code: "USD")))"
+            totalVolumeLabel.text = "\(c.total_volume!.formatted(.currency(code: "USD")))"
+            totalSupplyLabel.text = "\(c.total_supply?.formatted(.number) ?? "0.0") \(c.symbol!.uppercased())"
+            priceChangeLabel.text = "\(c.price_change_24h!.formatted(.currency(code: "USD")))"
+            priceChangePercentageLabel.text = "\(c.price_change_percentage_24h!.formatted(.number))%"
             
-            if c.price_change_24h < 0 {
+            if c.price_change_24h! < 0 {
                 priceChangeLabel.textColor = .red
                 priceChangePercentageLabel.textColor = .red
                 priceLabel.textColor = .red
                 arrowUpImage.isHidden = true
-            } else if c.price_change_24h > 0 {
+            } else if c.price_change_24h! > 0 {
                 priceChangeLabel.textColor = .systemGreen
                 priceChangePercentageLabel.textColor = .systemGreen
                 arrowDownImage.isHidden = true
