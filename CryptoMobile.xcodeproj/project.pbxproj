@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		773BF1582C677D2200C137D2 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773BF1572C677D2200C137D2 /* FavoritesVC.swift */; };
 		778D3D922C4FEC910014E8DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778D3D912C4FEC910014E8DB /* AppDelegate.swift */; };
 		778D3D942C4FEC910014E8DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778D3D932C4FEC910014E8DB /* SceneDelegate.swift */; };
 		778D3D962C4FEC910014E8DB /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778D3D952C4FEC910014E8DB /* HomePageVC.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		773BF1572C677D2200C137D2 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		778D3D8E2C4FEC910014E8DB /* CryptoMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		778D3D912C4FEC910014E8DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		778D3D932C4FEC910014E8DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				778D3D952C4FEC910014E8DB /* HomePageVC.swift */,
 				77D357CE2C51370D0053188A /* DetailVC.swift */,
+				773BF1572C677D2200C137D2 /* FavoritesVC.swift */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				773BF1582C677D2200C137D2 /* FavoritesVC.swift in Sources */,
 				778D3D962C4FEC910014E8DB /* HomePageVC.swift in Sources */,
 				778D3DA82C4FED370014E8DB /* SparklineIn7D.swift in Sources */,
 				778D3DAA2C500B940014E8DB /* CryptoCell.swift in Sources */,
