@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CryptoCellProtocol {
-    func addToFavorites(indexPath: IndexPath)
+    func toggleFavorite(indexPath: IndexPath)
 }
 
 class CryptoCell: UITableViewCell {
@@ -36,6 +36,6 @@ class CryptoCell: UITableViewCell {
     }
     
     @IBAction func starButtonClicked(_ sender: Any) {
-        cryptoCellProtocol?.addToFavorites(indexPath: indexPath!)
+        cryptoCellProtocol?.toggleFavorite(indexPath: indexPath!)
     }
 }

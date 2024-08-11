@@ -359,6 +359,9 @@
                                                             </constraints>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="starButtonClicked:" destination="ooo-bD-4PL" eventType="touchUpInside" id="6cc-dv-ZAc"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="250" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rqs-ou-n4r">
                                                             <rect key="frame" x="45" y="17" width="36" height="24"/>
@@ -423,6 +426,14 @@
                                                 <constraint firstItem="9lF-Ut-Nvo" firstAttribute="trailing" secondItem="mg3-Gq-on8" secondAttribute="trailingMargin" id="fck-AM-pFU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cryptoImageView" destination="LTT-Ok-wFF" id="GOq-7Q-k2A"/>
+                                            <outlet property="nameLabel" destination="ycL-2Y-exs" id="9PI-go-hS8"/>
+                                            <outlet property="placeLabel" destination="rqs-ou-n4r" id="6Ht-1j-Qms"/>
+                                            <outlet property="priceLabel" destination="Sjt-xf-g07" id="zci-FG-kTd"/>
+                                            <outlet property="starButton" destination="XV8-pt-Slk" id="1Mb-pV-XeQ"/>
+                                            <outlet property="symbolLabel" destination="ny9-bX-91L" id="88g-wG-EtG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

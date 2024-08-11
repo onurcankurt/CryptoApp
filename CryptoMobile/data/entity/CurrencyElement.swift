@@ -53,4 +53,10 @@ class CurrencyElement: Codable {
         self.sparkline_in_7d = sparkline_in_7d
         self.isFav = isFav
     }
+    
+    init(id: String, symbol: String, name: String) {
+        self.id = id
+        self.symbol = symbol
+        self.name = name
+    }
 }

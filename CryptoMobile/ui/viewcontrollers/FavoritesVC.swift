@@ -13,7 +13,7 @@ class FavoritesVC: UIViewController {
     @IBOutlet weak var favTableView: UITableView!
     
     var currencyList = [CurrencyElement]()
-    //var viewModel = HomePageViewModel()
+    var viewModel = FavoritesViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +21,24 @@ class FavoritesVC: UIViewController {
         favSearchBar.delegate = self
         favTableView.delegate = self
         favTableView.dataSource = self
+        
+        _ = viewModel.favoriteCurrencies.subscribe(onNext: { favs in
+            self.currencyList = favs
+            self.favTableView.reloadData()
+        })
     }
 }
 
 extension FavoritesVC: CryptoCellProtocol {
-    func addToFavorites(indexPath: IndexPath) {
-        print("added to favorites")
+    func toggleFavorite(indexPath: IndexPath) {
+        let currency = currencyList[indexPath.row]
+        viewModel.removeFromFavorites(id: currency.id!)
     }
 }
 
 extension FavoritesVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        //Currently unavailable due to API request limit
         print("\(searchText)")
     }
     
@@ -44,7 +51,7 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currency = currencyList[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cryptoCell") as! CryptoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favsCryptoCell") as! CryptoCell
         
         if let url = URL(string: currency.image!){
             DispatchQueue.main.async {

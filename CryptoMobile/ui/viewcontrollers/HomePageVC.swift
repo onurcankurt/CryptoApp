@@ -40,19 +40,17 @@ class HomePageVC: UIViewController {
 }
 
 extension HomePageVC: CryptoCellProtocol {
-    func addToFavorites(indexPath: IndexPath) {
+    func toggleFavorite(indexPath: IndexPath) {
         let currency = currencyList[indexPath.row]
         
         if currency.isFav == false {
             currency.isFav?.toggle()
             // add to sqlite fav list here
-            //
-            //
+            viewModel.addToFavorites(id: currency.id!, name: currency.name!, symbol: currency.symbol!)
         } else {
             currency.isFav?.toggle()
             // delete from sqlite fav list here
-            //
-            //
+            viewModel.removeFromFavorites(id: currency.id!)
         }
         NotificationCenter.default.post(name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
     }
@@ -122,6 +120,12 @@ extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
                 let destinationVC = segue.destination as! DetailVC
                 destinationVC.detailCurrency = senderData
                 destinationVC.navigationItem.title = senderData.name
+            }
+        }
+        
+        if segue.identifier == "toFavoritesVC" {
+            if let senderData = sender as? CurrencyElement {
+                let destinationVC = segue.destination as! FavoritesVC
             }
         }
     }

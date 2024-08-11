@@ -13,6 +13,7 @@ class HomePageViewModel {
     var cryptoCurrencies = BehaviorSubject(value: [CurrencyElement]())
     
     init() {
+        copySQLiteData()
         cryptoCurrencies = crepo.cryptoCurrencies
         fetchData()
     }
@@ -23,5 +24,16 @@ class HomePageViewModel {
     
     func uploadSearchingCurrencies(searchText: String){
         crepo.uploadSearchingCurrencies(searchText: searchText)
+    }
+    
+    func addToFavorites(id: String, name: String, symbol: String) {
+        crepo.addToFavorites(id: id, name: name, symbol: symbol)
+    }
+    
+    func removeFromFavorites(id: String) {
+        crepo.removeFromFavorites(id: id)
+    }
+    func copySQLiteData(){
+        crepo.copySQLiteData()
     }
 }

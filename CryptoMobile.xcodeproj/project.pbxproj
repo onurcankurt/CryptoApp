@@ -24,6 +24,9 @@
 		778D3DC02C5025ED0014E8DB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 778D3DBF2C5025ED0014E8DB /* Kingfisher */; };
 		77D357CF2C51370D0053188A /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D357CE2C51370D0053188A /* DetailVC.swift */; };
 		77D357D22C5137750053188A /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 77D357D12C5137750053188A /* DGCharts */; };
+		77F2DA142C68FA9800F33780 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 77F2DA132C68FA9800F33780 /* FMDB */; };
+		77F2DA162C68FBEE00F33780 /* favorites.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 77F2DA152C68FBEE00F33780 /* favorites.sqlite */; };
+		77F2DA182C690C0000F33780 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F2DA172C690C0000F33780 /* FavoritesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		778D3DAB2C5011DD0014E8DB /* CryptoDaoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDaoRepository.swift; sourceTree = "<group>"; };
 		778D3DBC2C5022DA0014E8DB /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		77D357CE2C51370D0053188A /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		77F2DA112C68FA6F00F33780 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		77F2DA152C68FBEE00F33780 /* favorites.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = favorites.sqlite; sourceTree = "<group>"; };
+		77F2DA172C690C0000F33780 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77F2DA142C68FA9800F33780 /* FMDB in Frameworks */,
 				77D357D22C5137750053188A /* DGCharts in Frameworks */,
 				778D3DC02C5025ED0014E8DB /* Kingfisher in Frameworks */,
 				778D3DAF2C5012130014E8DB /* RxSwift in Frameworks */,
@@ -64,6 +71,7 @@
 			children = (
 				778D3D902C4FEC910014E8DB /* CryptoMobile */,
 				778D3D8F2C4FEC910014E8DB /* Products */,
+				77F2DA102C68FA6F00F33780 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +94,7 @@
 				778D3D9A2C4FEC920014E8DB /* Assets.xcassets */,
 				778D3D9C2C4FEC920014E8DB /* LaunchScreen.storyboard */,
 				778D3D9F2C4FEC920014E8DB /* Info.plist */,
+				77F2DA152C68FBEE00F33780 /* favorites.sqlite */,
 			);
 			path = CryptoMobile;
 			sourceTree = "<group>";
@@ -130,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				778D3DBC2C5022DA0014E8DB /* HomePageViewModel.swift */,
+				77F2DA172C690C0000F33780 /* FavoritesViewModel.swift */,
 			);
 			path = viewmodels;
 			sourceTree = "<group>";
@@ -150,6 +160,14 @@
 				778D3DA92C500B940014E8DB /* CryptoCell.swift */,
 			);
 			path = tablecell;
+			sourceTree = "<group>";
+		};
+		77F2DA102C68FA6F00F33780 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77F2DA112C68FA6F00F33780 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +191,7 @@
 				778D3DB12C5012830014E8DB /* Alamofire */,
 				778D3DBF2C5025ED0014E8DB /* Kingfisher */,
 				77D357D12C5137750053188A /* DGCharts */,
+				77F2DA132C68FA9800F33780 /* FMDB */,
 			);
 			productName = CryptoMobile;
 			productReference = 778D3D8E2C4FEC910014E8DB /* CryptoMobile.app */;
@@ -207,6 +226,7 @@
 				778D3DB02C5012830014E8DB /* XCRemoteSwiftPackageReference "Alamofire" */,
 				778D3DBE2C5025ED0014E8DB /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				77D357D02C5137750053188A /* XCRemoteSwiftPackageReference "Charts" */,
+				77F2DA122C68FA9800F33780 /* XCRemoteSwiftPackageReference "fmdb" */,
 			);
 			productRefGroup = 778D3D8F2C4FEC910014E8DB /* Products */;
 			projectDirPath = "";
@@ -225,6 +245,7 @@
 				778D3D9B2C4FEC920014E8DB /* Assets.xcassets in Resources */,
 				778D3D9E2C4FEC920014E8DB /* Base in Resources */,
 				778D3D992C4FEC910014E8DB /* Base in Resources */,
+				77F2DA162C68FBEE00F33780 /* favorites.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				773BF1582C677D2200C137D2 /* FavoritesVC.swift in Sources */,
+				77F2DA182C690C0000F33780 /* FavoritesViewModel.swift in Sources */,
 				778D3D962C4FEC910014E8DB /* HomePageVC.swift in Sources */,
 				778D3DA82C4FED370014E8DB /* SparklineIn7D.swift in Sources */,
 				778D3DAA2C500B940014E8DB /* CryptoCell.swift in Sources */,
@@ -501,6 +523,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		77F2DA122C68FA9800F33780 /* XCRemoteSwiftPackageReference "fmdb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ccgus/fmdb";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.12;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -523,6 +553,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 77D357D02C5137750053188A /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		77F2DA132C68FA9800F33780 /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77F2DA122C68FA9800F33780 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
