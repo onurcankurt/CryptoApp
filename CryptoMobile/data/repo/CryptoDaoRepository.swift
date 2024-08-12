@@ -15,6 +15,8 @@ class CryptoDaoRepository {
     var favoriteCurrencies = BehaviorSubject(value: [CurrencyElement]())
     
     var db: FMDatabase?
+    let testURL = "https://raw.githubusercontent.com/onurcankurt/apitest/main/cryptolist.json"
+    let apiURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true"
     
     init() {
         let destinationPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
@@ -23,7 +25,7 @@ class CryptoDaoRepository {
     }
     
     func fetchData() {
-        let url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true"
+        let url = testURL
         
         AF.request(url).responseDecodable(of: [CurrencyElement].self) { response in
             switch response.result {
@@ -33,7 +35,7 @@ class CryptoDaoRepository {
                         crypto.isFav = false //Setting the fav values ​​of cryptos to false
                     }
                     // connect sqlite and control if crypto is in fav list
-                    self.db?.open()                    
+                    self.db?.open()
                     do {
                         let results = try self.db!.executeQuery("SELECT * FROM favorites", values: nil)
                         
@@ -62,12 +64,37 @@ class CryptoDaoRepository {
     
     func uploadSearchingCurrencies(searchText: String){
         var resultList = [CurrencyElement]()
-        let url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true"
+        let url = testURL
         
         AF.request(url, method: .get).response { response in
             if let data = response.data {
                 do {
                     let reply = try JSONDecoder().decode([CurrencyElement].self, from: data)
+                    for crypto in reply{
+                        crypto.isFav = false //Setting the fav values ​​of cryptos to false
+                    }
+                    //sqlite connection and comparison operations start
+                    self.db?.open()
+                    do {
+                        let results = try self.db!.executeQuery("SELECT * FROM favorites", values: nil)
+                        
+                        while results.next(){
+                            let currency = CurrencyElement(id: results.string(forColumn: "id")!,
+                                                           symbol: results.string(forColumn: "symbol")!,
+                                                           name: results.string(forColumn: "name")!
+                            )
+                            for crypto in reply {
+                                if crypto.id == currency.id{
+                                    crypto.isFav = true
+                                    break
+                                }
+                            }
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                    self.db?.close()
+                    //sqlite and comparison operations finish
                     
                     for currency in reply {
                         if currency.name!.uppercased().contains(searchText.uppercased()) ||
@@ -86,8 +113,7 @@ class CryptoDaoRepository {
     }
     
     func fetchFavorites(){
-        
-        let url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=true"
+        let url = testURL
         
         AF.request(url).responseDecodable(of: [CurrencyElement].self) { response in
             switch response.result {
@@ -96,7 +122,6 @@ class CryptoDaoRepository {
                     for crypto in cryptos{
                         crypto.isFav = false //Setting the fav values ​​of cryptos to false
                     }
-                    
                     
                     // connect sqlite and control if crypto is in fav list
                     self.db?.open()
@@ -114,6 +139,7 @@ class CryptoDaoRepository {
                                 if crypto.id == currency.id{
                                     crypto.isFav = true
                                     list.append(crypto)
+                                    break
                                 }
                             }
                         }

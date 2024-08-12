@@ -33,6 +33,7 @@ extension FavoritesVC: CryptoCellProtocol {
     func toggleFavorite(indexPath: IndexPath) {
         let currency = currencyList[indexPath.row]
         viewModel.removeFromFavorites(id: currency.id!)
+        NotificationCenter.default.post(name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
     }
 }
 

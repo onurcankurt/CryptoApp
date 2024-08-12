@@ -35,6 +35,7 @@ class HomePageVC: UIViewController {
     @objc func favoriteStatusChanged() {
         // Reload data
         viewModel.fetchData()
+        print("favoritesStatusCanged func called - reload crypto data")
         cryptoTableView.reloadData()
     }
 }
@@ -42,7 +43,8 @@ class HomePageVC: UIViewController {
 extension HomePageVC: CryptoCellProtocol {
     func toggleFavorite(indexPath: IndexPath) {
         let currency = currencyList[indexPath.row]
-        
+        print(currency.id!)
+        print(currency.isFav ?? true)
         if currency.isFav == false {
             currency.isFav?.toggle()
             // add to sqlite fav list here
@@ -52,7 +54,8 @@ extension HomePageVC: CryptoCellProtocol {
             // delete from sqlite fav list here
             viewModel.removeFromFavorites(id: currency.id!)
         }
-        NotificationCenter.default.post(name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
+        cryptoTableView.reloadRows(at: [indexPath], with: .automatic)
+        //NotificationCenter.default.post(name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
     }
 }
 
@@ -124,9 +127,6 @@ extension HomePageVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         if segue.identifier == "toFavoritesVC" {
-            if let senderData = sender as? CurrencyElement {
-                let destinationVC = segue.destination as! FavoritesVC
-            }
         }
     }
 }
